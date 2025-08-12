@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7c310cac-fa97-ee02-8bb7-3ddc797082e2}</ProjectGuid>
+    <ProjectGuid>{983bce9e-95c2-7d0b-5177-806a3afbf9f0}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <AssemblyName>IngameDebugConsole.Runtime</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -25,12 +25,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Temp\Bin\Debug\Assembly-CSharp-firstpass\</OutputPath>
-    <DefineConstants>UNITY_6000_1_13;UNITY_6000_1;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_LINUX;PLATFORM_STANDALONE;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_SPATIALTRACKING;ENABLE_MODULAR_UNITYENGINE_ASSEMBLIES;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;FISHNET;FISHNET_V4;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <OutputPath>Temp\Bin\Debug\IngameDebugConsole.Runtime\</OutputPath>
+    <DefineConstants>UNITY_6000_1_13;UNITY_6000_1;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_LINUX;PLATFORM_STANDALONE;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_SPATIALTRACKING;ENABLE_MODULAR_UNITYENGINE_ASSEMBLIES;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;FISHNET;FISHNET_V4;UNITY_ANDROID_JNI;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169,0649</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
@@ -44,27 +44,26 @@
     <Analyzer Include="/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll" />
     <Analyzer Include="/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="/home/arczewski/RiderProjects/nether-fishnet-transport/Library/PackageCache/com.firstgeargames.fishnet@6dcc40f13b9d/Runtime/Plugins/CodeAnalysis/FishNet.CodeAnalysis.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/IChannel.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/NetherTransport.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/c/kcp.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/include/kcp.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UnreliableChannel.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/define/system.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/RelaySocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ISocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ReliableChannelException.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/include/interface.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ManagedSocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ReliableChannel.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UdpSocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/MessageType.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/PingManager.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/PacketEncryption.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UnreliableChannelException.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ConnectionManager.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogResizeListener.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogRecycledListView.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Android/DebugLogLogcatListener.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/EventSystemHandler.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/Attributes/ConsoleMethodAttribute.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/Attributes/ConsoleAttribute.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugsOnScrollListener.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogItem.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogManager.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogItemCopyWebGL.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogConsole.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogPopup.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/CopyLogsOnResizeButtonClick.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/Attributes/ConsoleCustomTypeParserAttribute.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/CircularBuffer.cs" />
+    <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogEntry.cs" />
+    <None Include="Assets/Plugins/IngameDebugConsole/IngameDebugConsole.Runtime.asmdef" />
+    <None Include="Assets/Plugins/IngameDebugConsole/README.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -410,11 +409,26 @@
     <Reference Include="UnityEditor.XRModule">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEngine/UnityEditor.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/PackageCache/com.unity.ext.nunit@b16e6d09cd93/net40/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="FishNet.CodeAnalysis">
       <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/PackageCache/com.firstgeargames.fishnet@6dcc40f13b9d/Runtime/Plugins/CodeAnalysis/FishNet.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="ArcaneKit.Nether">
+      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Assets/Plugins/NetherTransport/ArcaneKit.Nether.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/PackageCache/com.unity.nuget.newtonsoft-json@74deb55db2a0/Runtime/Newtonsoft.Json.dll</HintPath>
@@ -791,44 +805,11 @@
     <Reference Include="mscorlib">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Editor">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Linux-x86_64">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="FishNet.Codegen.Cecil">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/FishNet.Codegen.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.Multiplayer.Center.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="GameKit.Dependencies">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/GameKit.Dependencies.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="FishNet.Demos">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/FishNet.Demos.dll</HintPath>
-    </Reference>
-    <Reference Include="FishNet.Runtime">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/FishNet.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.SysrootPackage.Editor">
-      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/home/arczewski/RiderProjects/nether-fishnet-transport/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>

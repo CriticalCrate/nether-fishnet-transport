@@ -2,6 +2,7 @@ obj/
 Logs/
 .idea/
 builds/
+build/
 Packages/
 Library/
 Temp/
