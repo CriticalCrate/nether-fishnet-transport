@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,37 +9,39 @@ namespace ArcaneKit.Nether
 {
     public class RelaySocket : ISocket
     {
+        private const int HostConnectionId = 1;
         public byte ConnectionId { get; private set; }
         private readonly ISocket socket;
         private EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
-        private readonly byte[] decryptionBuffer;
+        private readonly byte[] receiveBuffer;
         private readonly byte[] sendBuffer;
 
         private readonly Dictionary<byte, EndPoint> clientToEndpointMap = new();
         private readonly Dictionary<EndPoint, byte> endpointToClientMap = new();
         private readonly IPEndPoint relayEndpoint;
-        private PacketEncryption packetEncryption;
         private int roomId;
         private byte[] connectionSecretBytes;
+        private byte[] RoomSecretBytes;
         private DateTime lastSendPacket = DateTime.MaxValue;
 
         public RelaySocket(ISocket socket, IPEndPoint relayEndpoint)
         {
             this.socket = socket;
             this.relayEndpoint = relayEndpoint;
-            decryptionBuffer = new byte[socket.GetMTU()];
+            receiveBuffer = new byte[socket.GetMTU()];
             sendBuffer = new byte[socket.GetMTU()];
         }
 
         public (EndPoint, byte[], int) Receive()
         {
-            if (lastSendPacket.AddSeconds(1) < DateTime.UtcNow)
+            if (lastSendPacket.AddSeconds(5) < DateTime.UtcNow)
             {
                 // Ping relay to prevent timeout.
-                SendInternal(0, connectionSecretBytes, connectionSecretBytes.Length);
+                var payload = CreateConnectionPayload();
+                SendInternal(0, payload, payload.Length);
             }
             var (endpoint, data, length) = socket.Receive();
-            if (length == 0)
+            if (length == 0 || !endpoint.Equals(relayEndpoint))
                 return (remoteEndPoint, Array.Empty<byte>(), 0);
             var roomId = BitConverter.ToInt32(data, 0);
             if (roomId != this.roomId)
@@ -49,11 +52,11 @@ namespace ArcaneKit.Nether
                 return (remoteEndPoint, Array.Empty<byte>(), 0);
             var packet = data.AsSpan(6, length - 6);
             remoteEndPoint = GetOrCreateEndpointMapping(from);
-            length = packetEncryption.Decrypt(packet, decryptionBuffer);
-            return (remoteEndPoint, decryptionBuffer, length);
+            packet.CopyTo(receiveBuffer);
+            return (remoteEndPoint, receiveBuffer, packet.Length);
         }
 
-        public EndPoint GetOrCreateEndpointMapping(byte connectionId)
+        private EndPoint GetOrCreateEndpointMapping(byte connectionId)
         {
             if (clientToEndpointMap.TryGetValue(connectionId, out var endpointMapping))
                 return endpointMapping;
@@ -63,22 +66,28 @@ namespace ArcaneKit.Nether
             return mappedEndpoint;
         }
 
-        public async Task Setup(EndPoint serverIp = null)
+        private byte[] CreateConnectionPayload()
         {
-            Debug.Log("Connecting to relay...");
-            if (serverIp != null)
-            {
-                clientToEndpointMap.Add(1, serverIp);
-                endpointToClientMap.Add(serverIp, 1);
-            }
+            var payload = new byte[sizeof(int) + RoomSecretBytes.Length + sizeof(int) + connectionSecretBytes.Length];
+            BitConverter.TryWriteBytes(payload.AsSpan(0), RoomSecretBytes.Length);
+            RoomSecretBytes.CopyTo(payload.AsSpan(sizeof(int)));
+            BitConverter.TryWriteBytes(payload.AsSpan(sizeof(int) + RoomSecretBytes.Length), connectionSecretBytes.Length);
+            connectionSecretBytes.CopyTo(payload.AsSpan(sizeof(int) + sizeof(int) + RoomSecretBytes.Length));
+            return payload;
+        }
+
+        public IEnumerator ConnectToRelay(Action<bool> callback)
+        {
             var connectionStartTime = DateTime.UtcNow;
+            var payload = CreateConnectionPayload();
             while (DateTime.UtcNow - connectionStartTime <= TimeSpan.FromSeconds(10))
             {
-                SendInternal(0, connectionSecretBytes, connectionSecretBytes.Length);
-                await Task.Delay(500);
-                var (relayEndpoint, data, length) = socket.Receive();
-                if (length < 6)
+                SendInternal(0, payload, payload.Length);
+                yield return new WaitForSeconds(0.5f);
+                var (endpoint, data, length) = socket.Receive();
+                if (length < 6 || !endpoint.Equals(relayEndpoint))
                     continue;
+
                 var recvRoomId = BitConverter.ToInt32(data, 0);
                 if (recvRoomId != roomId)
                     continue;
@@ -88,12 +97,20 @@ namespace ArcaneKit.Nether
                 {
                     ConnectionId = recvFrom;
                     GetOrCreateEndpointMapping(ConnectionId);
-                    Debug.Log("Connected to relay.");
-                    return;
+                    callback?.Invoke(true);
+                    yield break;
                 }
-                await Task.Delay(1000);
+                yield return new WaitForSeconds(1);
             }
-            throw new Exception("Unable to connect");
+            callback?.Invoke(false);
+        }
+
+        public void AssignHost(EndPoint hostEndPoint)
+        {
+            if (hostEndPoint == null)
+                return;
+           endpointToClientMap.Add(hostEndPoint, HostConnectionId);
+           clientToEndpointMap.Add(HostConnectionId, hostEndPoint);
         }
 
         public void Send(EndPoint endPoint, byte[] data, int size)
@@ -109,21 +126,21 @@ namespace ArcaneKit.Nether
             BitConverter.TryWriteBytes(sendBuffer.AsSpan(0, 4), roomId);
             sendBuffer[4] = ConnectionId;
             sendBuffer[5] = to;
-            var length = packetEncryption.Encrypt(sendBuffer.AsSpan().Slice(6, sendBuffer.Length - 6), data.AsSpan(0, size)) + 6;
-            socket.Send(relayEndpoint, sendBuffer, length);
+            data.AsSpan(0, size).CopyTo(sendBuffer.AsSpan().Slice(6, sendBuffer.Length - 6));
+            socket.Send(relayEndpoint, sendBuffer, size + 6);
         }
 
         public RelaySocket WithConfiguration(byte connectionId, int roomId, string roomSecret, string connectionSecret)
         {
             this.roomId = roomId;
             ConnectionId = connectionId;
-            packetEncryption = new PacketEncryption(roomSecret);
             connectionSecretBytes = System.Text.Encoding.UTF8.GetBytes(connectionSecret);
+            RoomSecretBytes = Convert.FromBase64String(roomSecret);
             return this;
         }
 
         private const int RelayOverhead = 6;
-        public int GetMTU() => socket.GetMTU() - RelayOverhead - PacketEncryption.IvSize - PacketEncryption.TagSize;
+        public int GetMTU() => socket.GetMTU() - RelayOverhead;
 
         public void Dispose()
         {

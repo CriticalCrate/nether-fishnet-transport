@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ArcaneKit.Nether
 {
@@ -11,17 +13,15 @@ namespace ArcaneKit.Nether
         public event Action<EndPoint>? OnConnected;
 
         public readonly ISocket InternalSocket;
-        // private readonly PingManager pingManager;
         private readonly ConnectionManager connectionManager;
         private readonly Dictionary<EndPoint, ReliableChannel> reliableChannels = new();
         private readonly Dictionary<EndPoint, UnreliableChannel> unreliableChannels = new();
         private readonly DateTime startTime;
-        private bool isHost;
+        private bool isHost = true;
 
         public ManagedSocket(ISocket internalSocket)
         {
             InternalSocket = internalSocket;
-            // pingManager = new PingManager(internalSocket);
             connectionManager = new ConnectionManager();
             connectionManager.OnConnected += HandleOnConnected;
             connectionManager.OnDisconnected += HandleOnDisconnected;
@@ -33,18 +33,22 @@ namespace ArcaneKit.Nether
             InternalSocket.Send(endPoint, new[] { (byte)MessageType.Connect }, 1);
         }
 
-        public async Task<bool> Connect(EndPoint endPoint)
+        public IEnumerator Connect(EndPoint endPoint, Action<bool> callback)
         {
+            isHost = false;
             var attempts = 3;
             while (attempts > 0)
             {
                 attempts--;
                 InternalSocket.Send(endPoint, new[] { (byte)MessageType.Connect }, 1);
-                await Task.Delay(1000);
-                if (GetConnectionState(endPoint).HasValue)
-                    return true;
+                yield return new WaitForSeconds(1);
+                Pool(out _, out _, out _, out _);
+                if (!GetConnectionState(endPoint).HasValue)
+                    continue;
+                callback?.Invoke(true);
+                yield break;
             }
-            return false;
+            callback?.Invoke(false);
         }
 
         public void Disconnect(EndPoint endPoint)
@@ -64,11 +68,6 @@ namespace ArcaneKit.Nether
             return null;
         }
 
-        public void Host()
-        {
-            isHost = true;
-        }
-
         private void HandleOnDisconnected(EndPoint endpoint)
         {
             if (reliableChannels.Remove(endpoint, out var reliableChannel))
@@ -76,14 +75,12 @@ namespace ArcaneKit.Nether
             if (unreliableChannels.Remove(endpoint, out var unreliableChannel))
                 unreliableChannel.Dispose();
 
-            // pingManager.OnClientDisconnected(endpoint);
             OnDisconnected?.Invoke(endpoint);
         }
         private void HandleOnConnected(EndPoint endpoint)
         {
             reliableChannels.TryAdd(endpoint, new ReliableChannel(InternalSocket, endpoint));
             unreliableChannels.TryAdd(endpoint, new UnreliableChannel(InternalSocket, endpoint));
-            // pingManager.OnClientConnected(endpoint);
             OnConnected?.Invoke(endpoint);
         }
 
@@ -114,7 +111,6 @@ namespace ArcaneKit.Nether
             packetLength = 0;
             type = MessageType.Unreliable;
             connectionManager.CheckConnectionsTimeouts();
-            // pingManager.CheckForPendingPings();
             foreach (var reliableChannel in reliableChannels)
                 reliableChannel.Value.Update((uint)(DateTime.UtcNow - startTime).TotalMilliseconds);
 
@@ -127,12 +123,6 @@ namespace ArcaneKit.Nether
                 connectionManager.PacketReceived(sender, data, length);
                 switch (data[0])
                 {
-                    case (byte)MessageType.Ping:
-                        // pingManager.PingReceived(sender, data, length);
-                        break;
-                    case (byte)MessageType.Pong:
-                        // pingManager.PongReceived(sender, data, length);
-                        break;
                     case (byte)MessageType.Connect:
                     {
                         if (!isHost)

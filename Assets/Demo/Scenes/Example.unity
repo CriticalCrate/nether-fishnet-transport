@@ -1775,11 +1775,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRelay: 1
   relaySettings:
-    Ip: 188.245.185.209
-    Port: 7132
-    ConnectionId: 1
-    RoomId: 892814045
-    RoomSecret: 
+    Ip: 127.0.0.1
+    Port: 7000
+    ConnectionId: 2
+    RoomId: 2135472097
+    RoomSecret: z/lD9yRhGN4GqNIH0A7j2w==
     ConnectionSecret: dfasfdsfas
 --- !u!114 &930591980
 MonoBehaviour:
@@ -1797,8 +1797,8 @@ MonoBehaviour:
   _timingType: 0
   _allowTickDropping: 1
   _maximumFrameTicks: 3
-  _tickRate: 5
-  _pingInterval: 1
+  _tickRate: 10
+  _pingInterval: 5
   _physicsMode: 0
 --- !u!114 &930591981
 MonoBehaviour:
@@ -1814,7 +1814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _color: {r: 1, g: 1, b: 1, a: 1}
   _placement: 1
-  _hideTickRate: 1
+  _hideTickRate: 0
 --- !u!114 &930591982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,67 +3075,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1731515871 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5473594171386881717, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
-  m_PrefabInstance: {fileID: 544587014784705418}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1731515873 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
-  m_PrefabInstance: {fileID: 544587014784705418}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731515871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1731515877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731515871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 1731515873}
-  _networkObjectCache: {fileID: 0}
-  _componentConfiguration: 3
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 1
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSensitivity: 0.001
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSensitivity: 0.001
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!1 &1747026922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,7 +3122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkManager: {fileID: 930591978}
-  AsServer: 1
+  AsServer: 0
   Port: 8888
 --- !u!1 &1792813410
 GameObject:
@@ -4282,16 +4221,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1352283825}
     m_Modifications:
     - target: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
-      propertyPath: _isSpawnable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4154961231
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459289093350153090, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
+      propertyPath: _extrapolation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459289093350153090, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
+      propertyPath: _interpolation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5473594171386881717, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_Name
@@ -4340,10 +4283,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5473594171386881717, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1731515877}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
