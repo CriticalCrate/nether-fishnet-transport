@@ -1,0 +1,24 @@
+{
+  "name": "com.criticalcrate.nether-transport",
+  "version": "1.0.0",
+  "displayName": "Nether Transport",
+  "description": "Fishnet transport with support for ArcaneKit Herlad(relay service).",
+  "unity": "2021.3",
+  "documentationUrl": "https://github.com/CriticalCrate/nether-fishnet-transport/blob/mainREADME.md",
+  "licensesUrl": "https://github.com/CriticalCrate/nether-fishnet-transport/blob/main/LICENSE.md",
+  "license": "See LICENSE.txt file",
+  "keywords": [
+    "FishNetworking",
+    "Networking",
+    "FishNet",
+    "Transport",
+    "DedicatedServer"
+  ],
+  "author": {
+    "name": "CriticalCrate Artur Czapiewski",
+    "url": "https://github.com/arczewski"
+  },
+  "dependencies": {
+    "com.firstgeargames.fishnet": "4.6.12"
+  }
+}

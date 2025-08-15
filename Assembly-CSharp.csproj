@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Assets/Demo/Bootstrap.cs" />
     <Compile Include="Assets/Demo/Move.cs" />
+    <None Include="Assets/package.json" />
     <Reference Include="UnityEngine">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

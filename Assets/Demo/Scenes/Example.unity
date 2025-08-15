@@ -1700,6 +1700,8 @@ GameObject:
   - component: {fileID: 930591980}
   - component: {fileID: 930591981}
   - component: {fileID: 930591982}
+  - component: {fileID: 930591983}
+  - component: {fileID: 930591984}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1775,11 +1777,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRelay: 1
   relaySettings:
-    Ip: 127.0.0.1
-    Port: 7000
-    ConnectionId: 2
-    RoomId: 2135472097
-    RoomSecret: z/lD9yRhGN4GqNIH0A7j2w==
+    Ip: 188.245.185.209
+    Port: 7132
+    ConnectionId: 1
+    RoomId: 1552131290
+    RoomSecret: Ptbv2zLyk0Xfanwt4kor+g==
     ConnectionSecret: dfasfdsfas
 --- !u!114 &930591980
 MonoBehaviour:
@@ -1797,9 +1799,9 @@ MonoBehaviour:
   _timingType: 0
   _allowTickDropping: 1
   _maximumFrameTicks: 3
-  _tickRate: 10
+  _tickRate: 60
   _pingInterval: 5
-  _physicsMode: 0
+  _physicsMode: 1
 --- !u!114 &930591981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,6 +1834,42 @@ MonoBehaviour:
     _enableMode: 1
     _updateClient: 1
     _updateServer: 1
+--- !u!114 &930591983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930591974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08bb003fce297d4086cf8cba5aa459a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropExcessiveReplicates: 1
+  _maximumServerReplicates: 15
+  _createLocalStates: 1
+  _stateInterpolation: 2
+  _stateOrder: 1
+--- !u!114 &930591984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930591974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc8f0363ddc75946a958043c5e49a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _runInRelease: 0
+  _secondsAveraged: 1
+  _updateInterval: 1
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _placement: 0
+  _showOutgoing: 1
+  _showIncoming: 1
 --- !u!1 &941824153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3122,7 +3160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkManager: {fileID: 930591978}
-  AsServer: 0
+  AsServer: 1
   Port: 8888
 --- !u!1 &1792813410
 GameObject:
@@ -4220,21 +4258,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1352283825}
     m_Modifications:
-    - target: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
+    - target: {fileID: 771550075690282026, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1070964282022402690, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
+    - target: {fileID: 771550075690282026, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 4154961231
+      value: 3820989791
       objectReference: {fileID: 0}
     - target: {fileID: 5459289093350153090, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
-      propertyPath: _extrapolation
-      value: 1
+      propertyPath: _interval
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5459289093350153090, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: _interpolation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459289093350153090, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
+      propertyPath: _addedNetworkObject
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5473594171386881717, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_Name
@@ -4258,15 +4300,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8597015148813877994, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8597015148813877994, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8597015148813877994, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8597015148813877994, guid: 1b016155d878d745f8a3975e34c0b791, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

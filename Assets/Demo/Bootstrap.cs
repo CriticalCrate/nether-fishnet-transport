@@ -9,6 +9,7 @@ public class Bootstrap : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         if(AsServer)
             networkManager.ServerManager.StartConnection(Port);
         networkManager.ClientManager.StartConnection("127.0.0.1", Port);

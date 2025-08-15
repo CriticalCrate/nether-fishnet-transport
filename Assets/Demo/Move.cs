@@ -10,6 +10,7 @@ public class Move : MonoBehaviour
 
     private void Jump()
     {
-        GetComponent<Rigidbody2D>().AddForce(Vector3.up * force, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(Vector3.right * force, ForceMode2D.Impulse);
+        force *= -1;
     }
 }

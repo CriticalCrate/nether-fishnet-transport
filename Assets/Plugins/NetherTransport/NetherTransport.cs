@@ -21,7 +21,6 @@ public class NetherTransport : Transport
     private LocalConnectionState localConnectionState = LocalConnectionState.Stopped;
     private LocalConnectionState serverConnectionState = LocalConnectionState.Stopped;
     private EndPoint serverAddress;
-    private int transportIndex;
     private int clientIndex = 1;
     private int serverConnectionId = -1;
     private Queue<(ArraySegment<byte>, Channel)> toLocalClient = new();
@@ -37,12 +36,6 @@ public class NetherTransport : Transport
         public int RoomId;
         public string RoomSecret;
         public string ConnectionSecret;
-    }
-
-    public override void Initialize(NetworkManager networkManager, int transportIndex)
-    {
-        base.Initialize(networkManager, transportIndex);
-        this.transportIndex = transportIndex;
     }
 
     public override void SetPort(ushort port)
@@ -89,6 +82,7 @@ public class NetherTransport : Transport
     {
         if (isHost)
         {
+            //copy
             toLocalServer.Enqueue((segment, (Channel)channelId));
             return;
         }
@@ -126,14 +120,13 @@ public class NetherTransport : Transport
             case true when serverConnectionState != LocalConnectionState.Started:
                 return;
         }
-
         switch (asServer)
         {
             case false when isHost:
             {
                 while (toLocalClient.TryDequeue(out var message))
                 {
-                    HandleClientReceivedDataArgs(new ClientReceivedDataArgs(message.Item1, message.Item2, transportIndex));
+                    HandleClientReceivedDataArgs(new ClientReceivedDataArgs(message.Item1, message.Item2, Index));
                 }
                 return;
             }
@@ -142,7 +135,7 @@ public class NetherTransport : Transport
                 while (toLocalServer.TryDequeue(out var message))
                 {
                     HandleServerReceivedDataArgs(new ServerReceivedDataArgs(message.Item1, message.Item2, serverConnectionId,
-                        transportIndex));
+                        Index));
                 }
                 break;
             }
@@ -155,12 +148,12 @@ public class NetherTransport : Transport
                     return;
                 HandleServerReceivedDataArgs(new ServerReceivedDataArgs(new ArraySegment<byte>(data, 0, length),
                     messageType == MessageType.Reliable ? Channel.Reliable : Channel.Unreliable,
-                    connectionId, transportIndex));
+                    connectionId, Index));
                 return;
             }
             HandleClientReceivedDataArgs(new ClientReceivedDataArgs(new ArraySegment<byte>(data, 0, length),
                 messageType == MessageType.Reliable ? Channel.Reliable : Channel.Unreliable,
-                transportIndex));
+                Index));
         }
     }
     public override void IterateOutgoing(bool asServer)
@@ -177,13 +170,14 @@ public class NetherTransport : Transport
             case true:
                 isHost = true;
                 serverConnectionId = clientIndex++;
+                idToEndpoint.Add(serverConnectionId, null);
                 break;
             case false when isHost:
                 // local connection
                 localConnectionState = LocalConnectionState.Started;
-                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Started, transportIndex));
+                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Started, Index));
                 HandleRemoteConnectionState(
-                    new RemoteConnectionStateArgs(RemoteConnectionState.Started, serverConnectionId, transportIndex));
+                    new RemoteConnectionStateArgs(RemoteConnectionState.Started, serverConnectionId, Index));
                 return true;
         }
 
@@ -200,7 +194,7 @@ public class NetherTransport : Transport
             connectionId = clientIndex++;
             connectionToId[endpoint] = connectionId;
             idToEndpoint[connectionId] = endpoint;
-            HandleRemoteConnectionState(new RemoteConnectionStateArgs(RemoteConnectionState.Started, connectionId, transportIndex));
+            HandleRemoteConnectionState(new RemoteConnectionStateArgs(RemoteConnectionState.Started, connectionId, Index));
         };
 
         socket.OnDisconnected += endpoint =>
@@ -208,16 +202,16 @@ public class NetherTransport : Transport
             if (!asServer)
             {
                 localConnectionState = LocalConnectionState.Stopped;
-                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Stopped, transportIndex));
+                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Stopped, Index));
                 return;
             }
 
             if (!connectionToId.Remove(endpoint, out var connectionId))
                 return;
             idToEndpoint.Remove(connectionId);
-            HandleRemoteConnectionState(new RemoteConnectionStateArgs(RemoteConnectionState.Stopped, connectionId, transportIndex));
+            HandleRemoteConnectionState(new RemoteConnectionStateArgs(RemoteConnectionState.Stopped, connectionId, Index));
             if (localConnectionState == LocalConnectionState.Started)
-                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Stopped, transportIndex));
+                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Stopped, Index));
         };
 
         if (asServer)
@@ -227,7 +221,7 @@ public class NetherTransport : Transport
             else
             {
                 serverConnectionState = LocalConnectionState.Started;
-                HandleServerConnectionState(new ServerConnectionStateArgs(serverConnectionState, transportIndex));
+                HandleServerConnectionState(new ServerConnectionStateArgs(serverConnectionState, Index));
             }
             return true;
         }
@@ -272,7 +266,7 @@ public class NetherTransport : Transport
             {
                 localConnectionState = LocalConnectionState.Started;
                 serverConnectionState = LocalConnectionState.Started;
-                HandleServerConnectionState(new ServerConnectionStateArgs(serverConnectionState, transportIndex));
+                HandleServerConnectionState(new ServerConnectionStateArgs(serverConnectionState, Index));
             }
             callback?.Invoke(true);
         });
@@ -296,7 +290,7 @@ public class NetherTransport : Transport
                 Debug.Log("Connected to server");
                 localConnectionState = LocalConnectionState.Started;
                 serverConnectionState = LocalConnectionState.Started;
-                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Started, transportIndex));
+                HandleClientConnectionState(new ClientConnectionStateArgs(LocalConnectionState.Started, Index));
                 return;
             }
 
