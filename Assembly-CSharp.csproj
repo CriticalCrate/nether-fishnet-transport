@@ -49,7 +49,22 @@
   <ItemGroup>
     <Compile Include="Assets/Demo/Bootstrap.cs" />
     <Compile Include="Assets/Demo/Move.cs" />
-    <None Include="Assets/package.json" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\ConnectionManager.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\IChannel.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\ISocket.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\KCP\c\kcp.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\KCP\define\system.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\KCP\include\interface.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\KCP\include\kcp.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\ManagedSocket.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\MessageType.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\RelaySocket.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\ReliableChannel.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\ReliableChannelException.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\UdpSocket.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\UnreliableChannel.cs" />
+    <Compile Include="Assets\NetherTransport\ArcaneKit.Nether\UnreliableChannelException.cs" />
+    <Compile Include="Assets\NetherTransport\NetherTransport.cs" />
     <Reference Include="UnityEngine">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -824,6 +839,9 @@
       <Project>{7c310cac-fa97-ee02-8bb7-3ddc797082e2}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\NetherTransport\package.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

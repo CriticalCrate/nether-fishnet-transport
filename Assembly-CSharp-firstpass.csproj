@@ -47,22 +47,6 @@
     <Analyzer Include="/home/arczewski/RiderProjects/nether-fishnet-transport/Library/PackageCache/com.firstgeargames.fishnet@6dcc40f13b9d/Runtime/Plugins/CodeAnalysis/FishNet.CodeAnalysis.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Plugins/NetherTransport/NetherTransport.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/c/kcp.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/include/kcp.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UnreliableChannel.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/define/system.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/RelaySocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ISocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ReliableChannelException.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/KCP/include/interface.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ManagedSocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ReliableChannel.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UdpSocket.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/MessageType.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/UnreliableChannelException.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/ConnectionManager.cs" />
-    <Compile Include="Assets/Plugins/NetherTransport/ArcaneKit.Nether/IChannel.cs" />
     <Reference Include="UnityEngine">
       <HintPath>/home/arczewski/Unity/Hub/Editor/6000.1.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -833,6 +817,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
