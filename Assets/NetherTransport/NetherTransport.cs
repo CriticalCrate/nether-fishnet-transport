@@ -83,7 +83,7 @@ public class NetherTransport : Transport
         if (isHost)
         {
             //copy
-            toLocalServer.Enqueue((segment, (Channel)channelId));
+            toLocalServer.Enqueue((segment.ToArray(), (Channel)channelId));
             return;
         }
 
@@ -99,7 +99,7 @@ public class NetherTransport : Transport
     {
         if (connectionId == serverConnectionId)
         {
-            toLocalClient.Enqueue((segment, (Channel)channelId));
+            toLocalClient.Enqueue((segment.ToArray(), (Channel)channelId));
             return;
         }
         if (!idToEndpoint.TryGetValue(connectionId, out var endpoint))
