@@ -23,8 +23,8 @@ public class NetherTransport : Transport
     private EndPoint serverAddress;
     private int clientIndex = 1;
     private int serverConnectionId = -1;
-    private Queue<(ArraySegment<byte>, Channel)> toLocalClient = new();
-    private Queue<(ArraySegment<byte>, Channel)> toLocalServer = new();
+    private Queue<(byte[], Channel)> toLocalClient = new();
+    private Queue<(byte[], Channel)> toLocalServer = new();
     private bool isHost;
 
     [Serializable]
@@ -83,7 +83,9 @@ public class NetherTransport : Transport
         if (isHost)
         {
             //copy
-            toLocalServer.Enqueue((segment.ToArray(), (Channel)channelId));
+            var buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(segment.Count);
+            segment.CopyTo(buffer);
+            toLocalServer.Enqueue((buffer, (Channel)channelId));
             return;
         }
 
@@ -99,7 +101,9 @@ public class NetherTransport : Transport
     {
         if (connectionId == serverConnectionId)
         {
-            toLocalClient.Enqueue((segment.ToArray(), (Channel)channelId));
+            var buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(segment.Count);
+            segment.CopyTo(buffer);
+            toLocalClient.Enqueue((buffer, (Channel)channelId));
             return;
         }
         if (!idToEndpoint.TryGetValue(connectionId, out var endpoint))
@@ -126,7 +130,14 @@ public class NetherTransport : Transport
             {
                 while (toLocalClient.TryDequeue(out var message))
                 {
-                    HandleClientReceivedDataArgs(new ClientReceivedDataArgs(message.Item1, message.Item2, Index));
+                    try
+                    {
+                        HandleClientReceivedDataArgs(new ClientReceivedDataArgs(message.Item1, message.Item2, Index));
+                    }
+                    finally
+                    {
+                        System.Buffers.ArrayPool<byte>.Shared.Return(message.Item1);
+                    }
                 }
                 return;
             }
@@ -134,8 +145,15 @@ public class NetherTransport : Transport
             {
                 while (toLocalServer.TryDequeue(out var message))
                 {
-                    HandleServerReceivedDataArgs(new ServerReceivedDataArgs(message.Item1, message.Item2, serverConnectionId,
-                        Index));
+                    try
+                    {
+                        HandleServerReceivedDataArgs(new ServerReceivedDataArgs(message.Item1, message.Item2, serverConnectionId,
+                            Index));
+                    }
+                    finally
+                    {
+                        System.Buffers.ArrayPool<byte>.Shared.Return(message.Item1);
+                    }
                 }
                 break;
             }
@@ -304,8 +322,8 @@ public class NetherTransport : Transport
     {
         if (server && serverConnectionState == LocalConnectionState.Started)
         {
-            foreach (var idToEndpoint in idToEndpoint)
-                socket.Disconnect(idToEndpoint.Value);
+            foreach (var keyValue in idToEndpoint)
+                socket.Disconnect(keyValue.Value);
             socket.Dispose();
         }
         else if (localConnectionState == LocalConnectionState.Started)

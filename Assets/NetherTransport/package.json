@@ -1,6 +1,6 @@
 {
   "name": "com.criticalcrate.nether-transport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Nether Transport",
   "description": "Fishnet transport with support for ArcaneKit Herlad(relay service).",
   "unity": "2021.3",
@@ -19,6 +19,6 @@
     "url": "https://github.com/arczewski"
   },
   "dependencies": {
-    "com.firstgeargames.fishnet": "4.6.12"
+    "com.firstgeargames.fishnet": "^4.6.12"
   }
 }
