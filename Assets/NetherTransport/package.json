@@ -1,6 +1,6 @@
 {
   "name": "com.criticalcrate.nether-transport",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Nether Transport",
   "description": "Fishnet transport with support for ArcaneKit Herlad(relay service).",
   "unity": "2021.3",

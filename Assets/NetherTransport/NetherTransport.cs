@@ -23,8 +23,8 @@ public class NetherTransport : Transport
     private EndPoint serverAddress;
     private int clientIndex = 1;
     private int serverConnectionId = -1;
-    private Queue<(byte[], Channel)> toLocalClient = new();
-    private Queue<(byte[], Channel)> toLocalServer = new();
+    private Queue<(byte[], int, Channel)> toLocalClient = new();
+    private Queue<(byte[], int, Channel)> toLocalServer = new();
     private bool isHost;
 
     [Serializable]
@@ -85,7 +85,7 @@ public class NetherTransport : Transport
             //copy
             var buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(segment.Count);
             segment.CopyTo(buffer);
-            toLocalServer.Enqueue((buffer, (Channel)channelId));
+            toLocalServer.Enqueue((buffer, segment.Count, (Channel)channelId));
             return;
         }
 
@@ -103,7 +103,7 @@ public class NetherTransport : Transport
         {
             var buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(segment.Count);
             segment.CopyTo(buffer);
-            toLocalClient.Enqueue((buffer, (Channel)channelId));
+            toLocalClient.Enqueue((buffer, segment.Count, (Channel)channelId));
             return;
         }
         if (!idToEndpoint.TryGetValue(connectionId, out var endpoint))
@@ -132,7 +132,7 @@ public class NetherTransport : Transport
                 {
                     try
                     {
-                        HandleClientReceivedDataArgs(new ClientReceivedDataArgs(message.Item1, message.Item2, Index));
+                        HandleClientReceivedDataArgs(new ClientReceivedDataArgs(new ArraySegment<byte>(message.Item1, 0, message.Item2), message.Item3, Index));
                     }
                     finally
                     {
@@ -147,7 +147,7 @@ public class NetherTransport : Transport
                 {
                     try
                     {
-                        HandleServerReceivedDataArgs(new ServerReceivedDataArgs(message.Item1, message.Item2, serverConnectionId,
+                        HandleServerReceivedDataArgs(new ServerReceivedDataArgs(new ArraySegment<byte>(message.Item1, 0, message.Item2), message.Item3, serverConnectionId,
                             Index));
                     }
                     finally
